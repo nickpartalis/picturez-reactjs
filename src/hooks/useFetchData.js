@@ -7,6 +7,7 @@ export default function useFetch(query = "", page = 1) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [hasMore, setHasMore] = useState(false)
 
     useEffect(() => {
         setData([])
@@ -23,12 +24,17 @@ export default function useFetch(query = "", page = 1) {
             headers: { 'Authorization': `Client-ID ${API_KEY}` }
         })
             .then(response => {
-                setData(prevData => query === "" ? response.data : [...prevData, ...response.data.results])
+                console.log(response)
+                setData(prevData => query !== "" ? 
+                    [...new Set([...prevData, ...response.data.results])] : // for duplicates
+                    response.data
+                )
                 setError(null)
+                if (query !== "") setHasMore(response.data.total_pages > page)
             })
             .catch(err => setError(err))
             .finally(() => setLoading(false))
     }, [query, page])
 
-    return [data, loading, error]
+    return [data, loading, error, hasMore]
 }
