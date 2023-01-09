@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/picturez-reactjs/static/css/main.804b9c78.css",
+    "main.js": "/picturez-reactjs/static/js/main.017b8a8c.js",
+    "index.html": "/picturez-reactjs/index.html",
+    "main.804b9c78.css.map": "/picturez-reactjs/static/css/main.804b9c78.css.map",
+    "main.017b8a8c.js.map": "/picturez-reactjs/static/js/main.017b8a8c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.804b9c78.css",
+    "static/js/main.017b8a8c.js"
+  ]
+}
