@@ -2,7 +2,7 @@ import React from "react"
 
 import "./Card.css"
 
-export default function Card(props) {
+function Card(props) {
     return (
         <div className="card-container">
             <div>
@@ -21,10 +21,11 @@ export default function Card(props) {
                     </div>
                 </div>
                 <div className="content">
-                    <p className="content-descr"><em>{props.description ? props.description : props.alt_descr}</em></p>
-                    <p className="content-time"><time dateTime={props.time}>Uploaded: {props.time}</time></p>
+                    <p className="content-descr"><em>{props.description}</em></p>
                 </div>
             </div>
         </div>
     )
 }
+
+export default React.memo(Card)

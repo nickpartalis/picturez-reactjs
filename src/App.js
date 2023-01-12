@@ -21,9 +21,9 @@ export default function App() {
 		  if (cardNode) observer.current.observe(cardNode)
 	}, [loading, hasMore, error])
 
-	function handleSearch(searchQuery) {
+	const handleSearch = useCallback(searchQuery => {
 		setQuery(searchQuery)
-	}
+	}, [])
 
 	return (
 		<div>

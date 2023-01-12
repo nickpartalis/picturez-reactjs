@@ -4,15 +4,14 @@ import Masonry from 'react-masonry-css'
 
 import "./Cardgrid.css"
 
-const CardgridWithRef = React.forwardRef(
-    function Cardgrid(props, ref) {
-        const breakpointColumnsObj = {
-            default: 4,
-            1200: 3,
-            900: 2,
-            600: 1
-        }
-    
+const breakpointColumnsObj = {
+    default: 4,
+    1200: 3,
+    900: 2,
+    600: 1
+}
+
+const Cardgrid = React.forwardRef((props, ref) => {
         return (
             <main>
                 <Masonry
@@ -21,28 +20,16 @@ const CardgridWithRef = React.forwardRef(
                     columnClassName="masonry-grid_column"
                 >
                     {props.data.map((item, index) => {
-                        const cardProps = {
-                            url_small: item.urls.small,
-                            url_full: item.urls.full,
-                            user: {
-                                name: item.user.name,
-                                instagram: item.user.instagram_username,
-                                profile_img: item.user.profile_image.medium
-                            },
-                            description: item.description ? item.description : "",
-                            alt_descr: item.alt_description ? item.alt_description : "",
-                            time: new Date(item.updated_at).toDateString()
-                        }
                         if (props.data.length === index + 1) {
                             return (
                                 <div key={item.id} ref={ref}>
-                                    <Card {...cardProps} />
+                                    <Card {...item} />
                                 </div>
                             )
-                        } // else
+                        }
                         return (
                             <div key={item.id}>
-                                <Card {...cardProps} />
+                                <Card {...item} />
                             </div>
                         )
                     })}
@@ -52,4 +39,4 @@ const CardgridWithRef = React.forwardRef(
     }
 )
 
-export default CardgridWithRef
+export default React.memo(Cardgrid)

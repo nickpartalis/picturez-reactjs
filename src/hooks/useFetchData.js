@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const API_KEY = "H9HTD1I_fCBhHYUoIVzWaZ28yMBrPPFOfBkgUz31pj0" // TODO: Turn this into env variable
+const API_KEY = process.env.REACT_APP_API_KEY
 
 export default function useFetch(query = "", page = 1) {
     const [data, setData] = useState([])
@@ -15,7 +15,6 @@ export default function useFetch(query = "", page = 1) {
 
     useEffect(() => {
         setLoading(true)
-        console.log("API call")
         let url
         if (query === "") url = "https://api.unsplash.com/photos/random/?count=30"
         else url = `https://api.unsplash.com/search/photos/?query=${query}&page=${page}&per_page=30`
@@ -24,11 +23,22 @@ export default function useFetch(query = "", page = 1) {
             headers: { 'Authorization': `Client-ID ${API_KEY}` }
         })
             .then(response => {
-                console.log(response)
-                setData(prevData => query !== "" ? 
-                    [...new Set([...prevData, ...response.data.results])] : // for duplicates
-                    response.data
-                )
+                const responseData = query === "" ? response.data : response.data.results
+                const newData = responseData.map(item => {
+                    return {
+                        id: item.id,
+                        url_small: item.urls.small,
+                        url_full: item.urls.full,
+                        user: {
+                            name: item.user.name,
+                            instagram: item.user.instagram_username,
+                            profile_img: item.user.profile_image.medium
+                        },
+                        description: item.description ? item.description : "",
+                        alt_descr: item.alt_description ? item.alt_description : ""
+                    }
+                })
+                setData(prevData => [...new Set([...prevData, ...newData])]) //for duplicates
                 setError(null)
                 if (query !== "") setHasMore(response.data.total_pages > page)
             })

@@ -2,7 +2,7 @@ import React from "react"
 
 import "./Header.css"
 
-export default function Header({handleSearch}) {
+function Header({handleSearch}) {
     function handleEnter(e, value) {
         if (e.key === 'Enter') {
             handleSearch(value)
@@ -33,3 +33,5 @@ export default function Header({handleSearch}) {
         </header>
     )
 }
+
+export default React.memo(Header)
