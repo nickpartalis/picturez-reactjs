@@ -25,13 +25,15 @@
 }
 
 .user-name {
-    margin: 0;
     font-size: 1.3em;
     font-weight: 500;
 }
 
+.user-name,
 .user-insta {
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .content-descr {

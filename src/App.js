@@ -26,12 +26,16 @@ export default function App() {
 	}, [])
 
 	return (
-		<div>
+		<>
 			<Header handleSearch={handleSearch} />
 			<DarkMode />
 			{data && <Cardgrid data={data} ref={lastCardRef} />}
-			{loading && <p style={{textAlign: "center"}}>Loading...</p>}
-			{error && <p style={{textAlign: "center"}}>{error.message}</p>}
-    	</div>
+			{loading && <img src={process.env.PUBLIC_URL + '/loading.svg'} className="img-center" alt="Loading" /> /* <p style={{textAlign: "center"}}>Loading...</p> */} 
+			{error && <p style={{textAlign: "center"}}>
+				{error.response.data === "Rate Limit Exceeded" ? 
+				"Request limit reached. Please try again later." : //API limited to 50 requests/hour
+				error.message}
+			</p>}
+    	</>
   	)
 }

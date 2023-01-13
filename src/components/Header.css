@@ -14,6 +14,10 @@
   gap: 1.2rem;
 }
 
+.header-logo {
+  cursor: pointer;
+}
+
 .header-title {
   font-family: Lobster, Monospace;
   font-size: 1.7rem;
@@ -67,7 +71,22 @@
   font-size: 0.9em;
   height: 3em;
   width: 5.8em;
-  margin-left: 0.5em;
+}
+
+.header-btns > button:first-child {
+  margin-right: 0.5em;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 0.6rem;
+    position: static;
+  }
+
+  .header-search {
+    width: 90%;
+  }
 }
 
 /* DARK MODE */

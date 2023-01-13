@@ -10,7 +10,7 @@ function DarkMode() {
     }, [darkMode])
 
     return (
-        <button id="dark-mode-btn" onClick={() => setDarkMode(prev => !prev)}>
+        <button className="btn" id="dark-mode-btn" onClick={() => setDarkMode(prev => !prev)}>
             <p>
             {darkMode ? 
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-sun-fill" viewBox="0 0 16 16">

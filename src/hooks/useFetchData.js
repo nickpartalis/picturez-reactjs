@@ -42,7 +42,9 @@ export default function useFetch(query = "", page = 1) {
                 setError(null)
                 if (query !== "") setHasMore(response.data.total_pages > page)
             })
-            .catch(err => setError(err))
+            .catch(err => {
+                setError(err)
+                console.log(err)})
             .finally(() => setLoading(false))
     }, [query, page])
 
