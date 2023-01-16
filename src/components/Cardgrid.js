@@ -21,7 +21,7 @@ const Cardgrid = React.forwardRef((props, ref) => {
                     columnClassName="masonry-grid_column"
                 >
                     {props.data.map((item, index) => {
-                        if (props.data.length === index + 1) {
+                        if (props.data.length === index + 6) { //5th to last
                             return (
                                 <div key={item.id} ref={ref}>
                                     <Card {...item} />

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react"
 import Header from "./components/Header"
 import Cardgrid from "./components/Cardgrid"
-import DarkMode from "./components/DarkMode"
+import SideButtons from "./components/SideButtons"
 import useFetchData from "./hooks/useFetchData"
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
 	const [data, loading, error, hasMore] = useFetchData(query, page)
 
 	const observer = useRef()
-	const lastCardRef = useCallback(cardNode => {
+	const cardRef = useCallback(cardNode => {
 		if (loading) return
 		if (observer.current) observer.current.disconnect()
 		observer.current = new IntersectionObserver(entries => {
@@ -28,9 +28,9 @@ export default function App() {
 	return (
 		<>
 			<Header handleSearch={handleSearch} />
-			<DarkMode />
-			{data && <Cardgrid data={data} ref={lastCardRef} />}
-			{loading && <img src={process.env.PUBLIC_URL + '/loading.svg'} className="img-center" alt="Loading" /> /* <p style={{textAlign: "center"}}>Loading...</p> */} 
+			<SideButtons />
+			{data && <Cardgrid data={data} ref={cardRef} />}
+			{loading && <img src={process.env.PUBLIC_URL + '/loading.svg'} className="img-center" alt="Loading" />} 
 			{error && <p style={{textAlign: "center"}}>
 				{error.response.data === "Rate Limit Exceeded" ? 
 				"Request limit reached. Please try again later." : //API limited to 50 requests/hour

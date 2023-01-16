@@ -41,6 +41,7 @@ export default function useFetch(query = "", page = 1) {
                 setData(prevData => [...new Set([...prevData, ...newData])]) //for duplicates
                 setError(null)
                 if (query !== "") setHasMore(response.data.total_pages > page)
+                else setHasMore(true)
             })
             .catch(err => {
                 setError(err)
